@@ -1,0 +1,96 @@
+Pour créer une interface MATLAB qui permet de choisir parmi deux options (calcul de `sin(ax+b)` et addition de deux matrices d'ordre 6) et de générer les résultats correspondants, vous pouvez utiliser le code suivant :
+
+```matlab
+function createInterface()
+    % Créer une figure pour l'interface utilisateur
+    f = figure('Position', [300, 300, 400, 200], 'MenuBar', 'none', ...
+               'Name', 'Interface MATLAB', 'NumberTitle', 'off', 'Resize', 'off');
+
+    % Créer un bouton pour le calcul de sin(ax+b) et génération de courbe
+    uicontrol('Style', 'pushbutton', 'String', 'Calcul de sin(ax+b) et génération de courbe', ...
+              'Position', [50, 130, 300, 40], ...
+              'Callback', @calculateSin);
+
+    % Créer un bouton pour l'addition de 2 matrices d'ordre 6
+    uicontrol('Style', 'pushbutton', 'String', 'Addition de 2 matrices d''ordre 6', ...
+              'Position', [50, 80, 300, 40], ...
+              'Callback', @addMatrices);
+
+    % Créer un bouton pour quitter l'interface
+    uicontrol('Style', 'pushbutton', 'String', 'Quitter', ...
+              'Position', [50, 30, 300, 40], ...
+              'Callback', 'close(gcf)');
+end
+
+% Fonction pour le calcul de sin(ax+b) et génération de courbe
+function calculateSin(~, ~)
+    prompt = {'Entrez la valeur de a:', 'Entrez la valeur de b:'};
+    dlgtitle = 'Paramètres de sin(ax+b)';
+    dims = [1 35];
+    definput = {'1', '0'};
+    answer = inputdlg(prompt, dlgtitle, dims, definput);
+    
+    if ~isempty(answer)
+        a = str2double(answer{1});
+        b = str2double(answer{2});
+        x = linspace(-10, 10, 1000);
+        y = sin(a * x + b);
+        figure;
+        plot(x, y, 'Linewidth', 2);
+        grid on;
+        title(sprintf('Courbe de sin(%gx + %g)', a, b), 'FontSize', 12);
+        xlabel('x');
+        ylabel('sin(ax + b)');
+    end
+end
+
+% Fonction pour l'addition de 2 matrices d'ordre 6
+function addMatrices(~, ~)
+    A = randi(10, 6, 6);  % Génère une matrice 6x6 de nombres aléatoires entre 1 et 10
+    B = randi(10, 6, 6);  % Génère une autre matrice 6x6 de nombres aléatoires entre 1 et 10
+    C = A + B;            % Addition des deux matrices
+    
+    figure;
+    uitable('Data', C, 'ColumnWidth', {50}, 'Position', [20, 50, 350, 200]);
+    title('Résultat de l''addition de deux matrices d''ordre 6', 'FontSize', 12);
+end
+```
+
+### Explications ligne par ligne :
+
+#### Partie principale de l'interface :
+1. **`function createInterface()`**: Déclare la fonction principale qui crée l'interface utilisateur.
+2. **`f = figure('Position', [300, 300, 400, 200], 'MenuBar', 'none', 'Name', 'Interface MATLAB', 'NumberTitle', 'off', 'Resize', 'off');`**: Crée une nouvelle fenêtre pour l'interface utilisateur avec des propriétés spécifiques.
+3. **`uicontrol('Style', 'pushbutton', 'String', 'Calcul de sin(ax+b) et génération de courbe', 'Position', [50, 130, 300, 40], 'Callback', @calculateSin);`**: Crée un bouton pour le calcul de `sin(ax+b)` et la génération de courbe.
+4. **`uicontrol('Style', 'pushbutton', 'String', 'Addition de 2 matrices d''ordre 6', 'Position', [50, 80, 300, 40], 'Callback', @addMatrices);`**: Crée un bouton pour l'addition de deux matrices d'ordre 6.
+5. **`uicontrol('Style', 'pushbutton', 'String', 'Quitter', 'Position', [50, 30, 300, 40], 'Callback', 'close(gcf)');`**: Crée un bouton pour quitter l'interface.
+
+#### Fonction pour le calcul de `sin(ax+b)` et génération de courbe :
+1. **`function calculateSin(~, ~)`**: Déclare la fonction de rappel pour le calcul de `sin(ax+b)` et la génération de courbe.
+2. **`prompt = {'Entrez la valeur de a:', 'Entrez la valeur de b:'};`**: Définit les invites de saisie pour les paramètres `a` et `b`.
+3. **`dlgtitle = 'Paramètres de sin(ax+b)';`**: Définit le titre de la boîte de dialogue.
+4. **`dims = [1 35];`**: Définit les dimensions de la boîte de dialogue.
+5. **`definput = {'1', '0'};`**: Définit les valeurs par défaut pour `a` et `b`.
+6. **`answer = inputdlg(prompt, dlgtitle, dims, definput);`**: Ouvre une boîte de dialogue pour saisir les valeurs de `a` et `b`.
+7. **`if ~isempty(answer)`**: Vérifie si l'utilisateur a fourni une réponse.
+8. **`a = str2double(answer{1});`**: Convertit la réponse pour `a` en nombre.
+9. **`b = str2double(answer{2});`**: Convertit la réponse pour `b` en nombre.
+10. **`x = linspace(-10, 10, 1000);`**: Génère un vecteur `x` de -10 à 10 avec 1000 points.
+11. **`y = sin(a * x + b);`**: Calcule les valeurs de `y` en utilisant `sin(ax+b)`.
+12. **`figure;`**: Crée une nouvelle figure.
+13. **`plot(x, y, 'Linewidth', 2);`**: Trace la courbe de `y` en fonction de `x` avec une épaisseur de ligne de 2.
+14. **`grid on;`**: Active la grille.
+15. **`title(sprintf('Courbe de sin(%gx + %g)', a, b), 'FontSize', 12);`**: Ajoute un titre à la courbe avec les valeurs de `a` et `b`.
+16. **`xlabel('x');`**: Ajoute une étiquette à l'axe des abscisses.
+17. **`ylabel('sin(ax + b)');`**: Ajoute une étiquette à l'axe des ordonnées.
+
+#### Fonction pour l'addition de deux matrices d'ordre 6 :
+1. **`function addMatrices(~, ~)`**: Déclare la fonction de rappel pour l'addition de deux matrices d'ordre 6.
+2. **`A = randi(10, 6, 6);`**: Génère une matrice 6x6 de nombres aléatoires entre 1 et 10.
+3. **`B = randi(10, 6, 6);`**: Génère une autre matrice 6x6 de nombres aléatoires entre 1 et 10.
+4. **`C = A + B;`**: Calcule la somme des deux matrices.
+5. **`figure;`**: Crée une nouvelle figure.
+6. **`uitable('Data', C, 'ColumnWidth', {50}, 'Position', [20, 50, 350, 200]);`**: Affiche la matrice résultante dans un tableau GUI.
+7. **`title('Résultat de l''addition de deux matrices d''ordre 6', 'FontSize', 12);`**: Ajoute un titre à la figure.
+
+Pour exécuter ce code, enregistrez-le dans un fichier appelé `createInterface.m` et exécutez la fonction `createInterface` dans MATLAB. Cela ouvrira une fenêtre avec les trois boutons permettant de calculer `sin(ax+b)` et d'afficher la courbe ou d'additionner deux matrices et d'afficher le résultat dans une interface utilisateur.

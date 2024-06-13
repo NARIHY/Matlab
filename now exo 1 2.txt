@@ -1,0 +1,59 @@
+Je vais expliquer ligne par ligne le code MATLAB que vous avez fourni pour tracer deux courbes dans deux systèmes d'axes différents :
+
+```matlab
+x = 1:12; 
+t = [4.9 6.5 9.3 8.9 9.2 15.7 19.8 21.1 20 16 11 7.6];
+bar(x,t)
+ylabel('axe de l''histogramme')
+```
+
+1. `x = 1:12;` : Crée un vecteur `x` allant de 1 à 12.
+2. `t = [4.9 6.5 9.3 8.9 9.2 15.7 19.8 21.1 20 16 11 7.6];` : Crée un vecteur `t` contenant les valeurs des données.
+3. `bar(x,t)` : Trace un histogramme (bar plot) avec les valeurs `x` et `t`.
+4. `ylabel('axe de l''histogramme')` : Ajoute une étiquette à l'axe des ordonnées de l'histogramme.
+
+```matlab
+h1 = gca; 
+h2 = axes('Position', get(h1, 'Position'));
+```
+
+5. `h1 = gca;` : Récupère le handle (identifiant) des axes courants et le stocke dans `h1`.
+6. `h2 = axes('Position', get(h1, 'Position'));` : Crée un nouvel ensemble d'axes `h2` à la même position que `h1`.
+
+```matlab
+y = -0.0804*x.^3 + 1.11999*x.^2 - 2.9354*x + 7.1162; 
+plot(x, y, 'Linewidth', 2)
+```
+
+7. `y = -0.0804*x.^3 + 1.11999*x.^2 - 2.9354*x + 7.1162;` : Calcule les valeurs de `y` en utilisant un polynôme de degré 3 avec les coefficients donnés.
+8. `plot(x, y, 'Linewidth', 2)` : Trace une courbe continue des valeurs `x` contre `y` avec une épaisseur de ligne de 2.
+
+```matlab
+set(h2, 'YaxisLocation', 'right', 'Color', 'none', 'XtickLabel', [])
+set(h2, 'Xlim', get(h1, 'Xlim'), 'Layer', 'top')
+```
+
+9. `set(h2, 'YaxisLocation', 'right', 'Color', 'none', 'XtickLabel', []);` : Configure les axes `h2` pour que l'axe des ordonnées soit à droite (`'YaxisLocation', 'right'`), qu'ils soient transparents (`'Color', 'none'`), et qu'ils n'affichent pas les étiquettes des graduations en abscisse (`'XtickLabel', []`).
+10. `set(h2, 'Xlim', get(h1, 'Xlim'), 'Layer', 'top');` : Synchronise les limites des axes en abscisse de `h2` avec celles de `h1` et place les axes `h2` au-dessus (`'Layer', 'top'`).
+
+```matlab
+ylabel('axe de la courbe continue')
+```
+
+11. `ylabel('axe de la courbe continue');` : Ajoute une étiquette à l'axe des ordonnées des nouveaux axes `h2`.
+
+```matlab
+text(2, 6, 'texte incliné', 'Rotation', 35)
+```
+
+12. `text(2, 6, 'texte incliné', 'Rotation', 35);` : Ajoute du texte "texte incliné" à la position `(2, 6)` dans les axes avec une rotation de 35 degrés.
+
+```matlab
+grid
+title('Tracé de 2 courbes dans 2 systèmes d''axes différents', 'FontSize', 12)
+```
+
+13. `grid;` : Active la grille pour les axes courants.
+14. `title('Tracé de 2 courbes dans 2 systèmes d''axes différents', 'FontSize', 12);` : Ajoute un titre au graphique avec une taille de police de 12.
+
+Ce code montre comment superposer deux graphiques avec différents systèmes d'axes dans la même figure en MATLAB. Le premier graphique est un histogramme, tandis que le second est une courbe polynomiale continue tracée par-dessus.

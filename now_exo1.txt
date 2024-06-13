@@ -1,0 +1,81 @@
+Je vais expliquer ligne par ligne le code MATLAB que vous avez fourni :
+
+```matlab
+t = -pi:pi/20:pi;
+x = 2*cos(t);
+y = sin(3*t);
+subplot(3,2,1) 
+plot(x,y) 
+grid 
+title('courbe param?trique 2D')
+```
+
+1. `t = -pi:pi/20:pi;` : Crée un vecteur `t` qui va de `-pi` à `pi` avec des pas de `pi/20`.
+2. `x = 2*cos(t);` : Calcule les valeurs de `x` en utilisant la fonction `cos` sur les valeurs de `t`, multipliées par 2.
+3. `y = sin(3*t);` : Calcule les valeurs de `y` en utilisant la fonction `sin` sur les valeurs de `3*t`.
+4. `subplot(3,2,1)` : Crée un sous-plot dans la première position d'une grille de 3x2 sous-plots.
+5. `plot(x,y)` : Trace une courbe en 2D des valeurs `x` contre `y`.
+6. `grid` : Active la grille pour le sous-plot courant.
+7. `title('courbe param?trique 2D')` : Ajoute un titre au sous-plot.
+
+```matlab
+subplot(3,2,2) 
+x = -10:10;
+y = x;
+[X,Y] = meshgrid(x,y);
+Z = X.^3 + Y.^3; 
+mesh(X,Y,Z) 
+grid  
+title('surface en fil de fer') 
+```
+
+1. `subplot(3,2,2)` : Crée un sous-plot dans la deuxième position d'une grille de 3x2 sous-plots.
+2. `x = -10:10;` : Crée un vecteur `x` allant de -10 à 10.
+3. `y = x;` : Affecte les mêmes valeurs de `x` à `y`.
+4. `[X,Y] = meshgrid(x,y);` : Crée des matrices 2D `X` et `Y` contenant les coordonnées de grille pour `x` et `y`.
+5. `Z = X.^3 + Y.^3;` : Calcule les valeurs de `Z` en élevant chaque élément de `X` et `Y` à la puissance 3 et en les additionnant.
+6. `mesh(X,Y,Z)` : Trace une surface en fil de fer définie par `X`, `Y`, et `Z`.
+7. `grid` : Active la grille pour le sous-plot courant.
+8. `title('surface en fil de fer')` : Ajoute un titre au sous-plot.
+
+```matlab
+subplot(3,2,3)  
+t = -10:0.1:10;
+x = 10*sin(t).*cos(t);
+y = 10*sin(t).^2;
+z = 10*cos(t); 
+plot3(x,y,z);
+title('courbe param?trique 3D') 
+grid 
+```
+
+1. `subplot(3,2,3)` : Crée un sous-plot dans la troisième position d'une grille de 3x2 sous-plots.
+2. `t = -10:0.1:10;` : Crée un vecteur `t` allant de -10 à 10 avec des pas de 0.1.
+3. `x = 10*sin(t).*cos(t);` : Calcule les valeurs de `x` en utilisant `10 * sin(t) * cos(t)`.
+4. `y = 10*sin(t).^2;` : Calcule les valeurs de `y` en utilisant `10 * (sin(t))^2`.
+5. `z = 10*cos(t);` : Calcule les valeurs de `z` en utilisant `10 * cos(t)`.
+6. `plot3(x,y,z);` : Trace une courbe paramétrique en 3D définie par `x`, `y`, et `z`.
+7. `title('courbe param?trique 3D')` : Ajoute un titre au sous-plot.
+8. `grid` : Active la grille pour le sous-plot courant.
+
+```matlab
+subplot(3,2,4) 
+x = -5:5;
+y = x;
+[X,Y] = meshgrid(x,y);
+Z = sqrt(X.^2 + Y.^2); 
+surfc(X,Y,Z) 
+grid
+title('surface avec contours')
+```
+
+1. `subplot(3,2,4)` : Crée un sous-plot dans la quatrième position d'une grille de 3x2 sous-plots.
+2. `x = -5:5;` : Crée un vecteur `x` allant de -5 à 5.
+3. `y = x;` : Affecte les mêmes valeurs de `x` à `y`.
+4. `[X,Y] = meshgrid(x,y);` : Crée des matrices 2D `X` et `Y` contenant les coordonnées de grille pour `x` et `y`.
+5. `Z = sqrt(X.^2 + Y.^2);` : Calcule les valeurs de `Z` en utilisant `sqrt(X.^2 + Y.^2)`, ce qui donne la distance de chaque point à l'origine.
+6. `surfc(X,Y,Z)` : Trace une surface avec des contours définie par `X`, `Y`, et `Z`.
+7. `grid` : Active la grille pour le sous-plot courant.
+8. `title('surface avec contours')` : Ajoute un titre au sous-plot.
+
+Ces lignes de code montrent comment tracer différentes sortes de graphiques (courbes paramétriques, surfaces en fil de fer, courbes en 3D et surfaces avec contours) en utilisant MATLAB.
